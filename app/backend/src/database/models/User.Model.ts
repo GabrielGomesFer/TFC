@@ -19,7 +19,7 @@ User.init({
     allowNull: false,
   },
   username: DataTypes.STRING,
-  roles: DataTypes.STRING,
+  role: DataTypes.STRING,
   email: DataTypes.STRING,
   password: DataTypes.STRING,
 }, {
