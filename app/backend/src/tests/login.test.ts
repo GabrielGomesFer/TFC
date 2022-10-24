@@ -100,7 +100,7 @@ describe('Login', () => {
     const httpResponse = await chai
     .request(app)
     .get('/login/validate')
-    .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY2NjY0MDA5OSwiZXhwIjoxNjY2NzI2NDk5fQ.bCVzQpoH7Td79m7ytlCLoxOhDwXpldpdst-y-ceghuM');
+    .set('authorization', loggedUser.body.token);
 
     expect(httpResponse.status).to.be.equal(200);
     expect(httpResponse.body).to.be.deep.equal({ message: 'user' });

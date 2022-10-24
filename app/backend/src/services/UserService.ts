@@ -13,8 +13,7 @@ class UserService {
 
   public validateRole = async (token: string) => {
     const result = validateToken(token);
-    console.log('Result service', result);
-
+    // console.log('Result service', result);
     return result;
   };
 }
