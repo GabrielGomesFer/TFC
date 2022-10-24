@@ -11,11 +11,10 @@ class App {
 
     this.config();
 
-    // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ ok: true }));
-
     this.app.post('/login', loginAut, userController.login);
     this.app.get('/login/validate', userController.validateRole);
+    // Não remover essa rota
+    this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
   private config():void {

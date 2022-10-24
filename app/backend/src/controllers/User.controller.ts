@@ -12,12 +12,12 @@ class UserController {
     const user = await this.userService.login(email);
 
     const token = jwt.sign(
-      { userId: user.id },
+      { userId: user.id, role: user.role },
       secret,
       { algorithm: 'HS256', expiresIn: '1d' },
     );
 
-    console.log(token);
+    // console.log(token);
     return res.status(200).json({ token });
   };
 
@@ -28,9 +28,11 @@ class UserController {
       return res.status(401).json({ message: 'unauthorized' });
     }
 
-    const role = this.userService.validateRole(token as string);
+    const { role } = await this.userService.validateRole(token as string);
 
-    return response.status(200).json(role);
+    console.log('validate controller', role);
+    const objeto = JSON.parse(JSON.stringify({ role }));
+    return response.status(200).json(objeto);
   };
 }
 

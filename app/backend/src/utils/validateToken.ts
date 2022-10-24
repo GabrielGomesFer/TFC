@@ -1,17 +1,13 @@
-import { verify } from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
+import 'dotenv';
+import userInterface from '../interfaces/userInterface';
 
-export interface payloadJWT {
-  payload: {
-    role: string;
-    email: string;
-  };
-}
+const JWT_SECRET = process.env.JWT_SECRET as string;
 
-export default function validateToken(token: string) {
-  const { payload } = verify(
-    token,
-    process.env.JWT_SECRET as string,
-  ) as payloadJWT;
+const validateToken = (token: string) => {
+  const verifyToken = jwt.verify(token, JWT_SECRET) as userInterface;
+  console.log('verifyToken', verifyToken);
+  return verifyToken;
+};
 
-  return payload;
-}
+export default validateToken;

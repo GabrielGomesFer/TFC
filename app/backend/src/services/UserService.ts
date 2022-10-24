@@ -12,9 +12,10 @@ class UserService {
   }
 
   public validateRole = async (token: string) => {
-    const { role } = validateToken(token);
+    const result = validateToken(token);
+    console.log('Result service', result);
 
-    return { role };
+    return result;
   };
 }
 export default UserService;
