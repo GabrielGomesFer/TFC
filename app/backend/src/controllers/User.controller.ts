@@ -8,7 +8,7 @@ const secret = process.env.JWT_SECRET as string;
 class UserController {
   constructor(private userService = new UserService()) {}
   public login = async (req: Request, res: Response) => {
-    console.log('ta funcionando');
+    // console.log('ta funcionando');
     const { email } = req.body;
     const user = await this.userService.login(email);
 
