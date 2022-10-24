@@ -1,3 +1,4 @@
+import validateToken from '../utils/validateToken';
 import UserModel from '../database/models/User.Model';
 import userInterface from '../interfaces/userInterface';
 
@@ -9,6 +10,11 @@ class UserService {
 
     return result as unknown as userInterface;
   }
-}
 
+  public validateRole = async (token: string) => {
+    const { role } = validateToken(token);
+
+    return { role };
+  };
+}
 export default UserService;
