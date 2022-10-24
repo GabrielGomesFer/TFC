@@ -1,4 +1,4 @@
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import UserService from '../services/UserService';
 import 'dotenv/config';
@@ -31,8 +31,7 @@ class UserController {
     const { role } = await this.userService.validateRole(token as string);
 
     console.log('validate controller', role);
-    const objeto = JSON.parse(JSON.stringify({ role }));
-    return response.status(200).json(objeto);
+    return res.status(200).json({ role });
   };
 }
 
