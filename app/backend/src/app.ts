@@ -13,9 +13,11 @@ class App {
 
     this.config();
 
+    // Login endpoint
     this.app.post('/login', loginAut, userController.login);
     this.app.get('/login/validate', userController.validateRole);
 
+    // Teams endpoint
     this.app.get('/teams', teamController.allTeams);
     this.app.get('/teams/:id', teamController.teamById);
     // Não remover essa rota
