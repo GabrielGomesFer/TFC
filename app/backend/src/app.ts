@@ -2,9 +2,12 @@ import * as express from 'express';
 import UserController from './controllers/User.controller';
 import loginAut from './middlewares/authentication';
 import TeamController from './controllers/Team.controller';
+import MatchController from './controllers/Match.controller';
 
 const userController = new UserController();
 const teamController = new TeamController();
+const matchController = new MatchController();
+
 class App {
   public app: express.Express;
 
@@ -20,6 +23,9 @@ class App {
     // Teams endpoint
     this.app.get('/teams', teamController.allTeams);
     this.app.get('/teams/:id', teamController.teamById);
+
+    // Matches endpoint
+    this.app.get('/matches', matchController.getAllMatches);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
