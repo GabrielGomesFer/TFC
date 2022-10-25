@@ -12,8 +12,6 @@ export default class MatchService {
         { model: this.teamModel, as: 'teamAway', attributes: { exclude: ['id'] } },
       ],
     });
-
-    console.log('service Result', result);
     return result;
   }
 
@@ -27,5 +25,22 @@ export default class MatchService {
     });
 
     return result;
+  }
+
+  public async createMatch(
+    homeTeam: number,
+    awayTeam: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ) {
+    const result = await this.matchModel.create({
+      homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress: true,
+    });
+
+    return result;
+  }
+
+  public async finishMatch(id: string) {
+    await this.matchModel.update({ inProgress: false }, { where: { id } });
   }
 }

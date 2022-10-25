@@ -26,6 +26,8 @@ class App {
 
     // Matches endpoint
     this.app.get('/matches', matchController.getAllMatches);
+    this.app.post('/matches', matchController.createMatch);
+    this.app.patch('/matches/:id/finish', matchController.finishMatch);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }

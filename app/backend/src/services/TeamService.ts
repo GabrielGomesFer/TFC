@@ -4,6 +4,10 @@ import { teamInterface } from '../interfaces/teamInterface';
 class TeamService {
   private model = TeamModel;
 
+  constructor() {
+    this.getTeamById = this.getTeamById.bind(this);
+  }
+
   public async getAll(): Promise<teamInterface> {
     const result = await this.model.findAll() as unknown as teamInterface;
 
