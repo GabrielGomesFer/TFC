@@ -5,10 +5,14 @@ import TeamController from './controllers/Team.controller';
 import MatchController from './controllers/Match.controller';
 import validTeamId from './middlewares/validTeamId';
 import validTokenAut from './middlewares/validTokenAut';
+import LeaderboardHomeController from './controllers/LeaderboardHomeController';
+import LeaderboardAwayController from './controllers/leaderboardAwayController';
 
 const userController = new UserController();
 const teamController = new TeamController();
 const matchController = new MatchController();
+const leaderboardHomeController = new LeaderboardHomeController();
+const leaderboardAwayController = new LeaderboardAwayController();
 
 class App {
   public app: express.Express;
@@ -31,6 +35,11 @@ class App {
     this.app.post('/matches', validTokenAut, validTeamId, matchController.createMatch);
     this.app.patch('/matches/:id/finish', matchController.finishMatch);
     this.app.patch('/matches/:id', matchController.updateMatchGoals);
+
+    // /Leaderboard endpoint
+    this.app.get('/leaderboard/home', leaderboardHomeController.getLeaderboard);
+    this.app.get('/leaderboard/Away', leaderboardAwayController.getLeaderboard);
+
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
