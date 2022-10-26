@@ -4,6 +4,7 @@ import loginAut from './middlewares/authentication';
 import TeamController from './controllers/Team.controller';
 import MatchController from './controllers/Match.controller';
 import validTeamId from './middlewares/validTeamId';
+import validTokenAut from './middlewares/validTokenAut';
 
 const userController = new UserController();
 const teamController = new TeamController();
@@ -27,7 +28,7 @@ class App {
 
     // /Matches endpoint
     this.app.get('/matches', matchController.getAllMatches);
-    this.app.post('/matches', validTeamId, matchController.createMatch);
+    this.app.post('/matches', validTokenAut, validTeamId, matchController.createMatch);
     this.app.patch('/matches/:id/finish', matchController.finishMatch);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
