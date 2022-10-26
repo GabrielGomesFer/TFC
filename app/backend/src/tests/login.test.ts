@@ -7,6 +7,7 @@ import { app } from '../app';
 import User from '../database/models/User.Model';
 
 import { Response } from 'superagent';
+import { validToken } from './mocks/token';
 
 chai.use(chaiHttp);
 
@@ -92,17 +93,13 @@ describe('Login', () => {
   });
 
   it('Testa validação com sucesso', async () => {
-    const loggedUser = await chai
-    .request(app)
-    .post('/login')
-    .send({ email: 'user@user.com', password: 'secret_user' });
     
     const httpResponse = await chai
     .request(app)
     .get('/login/validate')
-    .set('authorization', loggedUser.body.token);
+    .set('Authorization', validToken);
 
     expect(httpResponse.status).to.be.equal(200);
-    expect(httpResponse.body).to.be.deep.equal({ message: 'user' });
+    expect(httpResponse.body).to.be.deep.equal({ message: 'admin' });
   });
 });

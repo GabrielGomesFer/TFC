@@ -43,4 +43,10 @@ export default class MatchService {
   public async finishMatch(id: string) {
     await this.matchModel.update({ inProgress: false }, { where: { id } });
   }
+
+  public async updateMatchGoals(id: string, homeTeamGoals: number, awayTeamGoals: number) {
+    await this.matchModel.update({
+      homeTeamGoals, awayTeamGoals,
+    }, { where: { id } });
+  }
 }

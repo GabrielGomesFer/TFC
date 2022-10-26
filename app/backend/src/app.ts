@@ -30,6 +30,7 @@ class App {
     this.app.get('/matches', matchController.getAllMatches);
     this.app.post('/matches', validTokenAut, validTeamId, matchController.createMatch);
     this.app.patch('/matches/:id/finish', matchController.finishMatch);
+    this.app.patch('/matches/:id', matchController.updateMatchGoals);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }

@@ -7,7 +7,6 @@ export default class MatchController {
   public getAllMatches = async (req: Request, res: Response) => {
     const { inProgress } = req.query;
 
-    console.log('controller entrou');
     if (inProgress) {
       const matchInProgress = await this.matchService.getMatchesInProgress(inProgress === 'true');
       return res.status(200).json(matchInProgress);
@@ -42,5 +41,14 @@ export default class MatchController {
     await this.matchService.finishMatch(id);
 
     return res.status(200).json({ message: 'Finished' });
+  };
+
+  public updateMatchGoals = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    await this.matchService.updateMatchGoals(id, homeTeamGoals, awayTeamGoals);
+
+    return res.status(200).json({ message: 'Updated' });
   };
 }
